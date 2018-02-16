@@ -12,6 +12,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Tars.Csharp.Codecs\Tars.Csharp.Codecs.csproj" />
     <ProjectReference Include="..\..\src\Tars.Csharp.Rpc\Tars.Csharp.Rpc.csproj" />
+    <ProjectReference Include="..\Hello.Common\Hello.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="testapp.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

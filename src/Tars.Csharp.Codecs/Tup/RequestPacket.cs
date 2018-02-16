@@ -20,9 +20,9 @@ namespace Tars.Csharp.Codecs.Tup
 
         public int Timeout { get; set; }
 
-        public IDictionary<string, string> Context { get; set; }
+        public IDictionary<string, string> Context { get; set; } = new Dictionary<string, string>();
 
-        public IDictionary<string, string> Status { get; set; }
+        public IDictionary<string, string> Status { get; set; } = new Dictionary<string, string>();
 
         public int Ret { get; set; }
 
@@ -38,7 +38,28 @@ namespace Tars.Csharp.Codecs.Tup
                 ServantName = ServantName,
                 FuncName = FuncName,
                 Timeout = Timeout,
+                Context = new Dictionary<string, string>(),
+                Status = new Dictionary<string, string>()
             };
+        }
+
+        public void SetRetToStatus()
+        {
+            Status.Add(Const.StatusResultCode, Ret.ToString());
+            Status.Add(Const.StatusResultDesc, ResultDesc ?? "");
+        }
+
+        public void GetRetToStatus()
+        {
+            if (Status.TryGetValue(Const.StatusResultCode, out string code))
+            {
+                int.TryParse(code, out int ret);
+                Ret = ret;
+            }
+            if (Status.TryGetValue(Const.StatusResultDesc, out string retStatus))
+            {
+                ResultDesc = retStatus;
+            }
         }
     }
 }
